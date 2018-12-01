@@ -7,10 +7,11 @@ from yaml import safe_dump
 @click.option('--service', prompt='Service', help='Service you want to generate a statement for')
 @click.option('--effect', prompt='Allow', help='effect for the actions', default='Allow')
 @click.option('--resource', prompt='Resource', help='resource to apply the effect for the actions for')
-@click.option('--use_json', help='output you want (yaml or json)', default=False)
+@click.option('--use_json', help='output you want (yaml or json)', is_flag=True)
 @click.option('--add_all', help='add all', is_flag=True)
 def generate(service, effect, resource, use_json, add_all):
-	"""generate a set of iam policy statement"""
+	"""Interactive tool to generate a statement for an IAM policy.  Uses the latest list
+of services and actions from AWS"""
 	response = requests.get('https://awspolicygen.s3.amazonaws.com/js/policies.js')
 	policy_editor_config = response.text.replace('app.PolicyEditorConfig=', '')
 	service_map = json.loads(policy_editor_config).get('serviceMap')
