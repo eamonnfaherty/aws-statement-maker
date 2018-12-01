@@ -5,10 +5,10 @@ from yaml import safe_dump
 
 @click.command()
 @click.option('--service', prompt='Service', help='Service you want to generate a statement for')
-@click.option('--effect', prompt='Allow', help='effect for the actions', default='Allow')
+@click.option('--effect', prompt='Allow', help='effect for the actions you are specifying', default='Allow')
 @click.option('--resource', prompt='Resource', help='resource to apply the effect for the actions for')
 @click.option('--use_json', help='output you want (yaml or json)', is_flag=True)
-@click.option('--add_all', help='add all', is_flag=True)
+@click.option('--add_all', help='do not interactively ask per each action, add all instead', is_flag=True)
 def generate(service, effect, resource, use_json, add_all):
 	"""Interactive tool to generate a statement for an IAM policy.  Uses the latest list
 of services and actions from AWS"""
