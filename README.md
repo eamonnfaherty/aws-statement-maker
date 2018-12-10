@@ -70,3 +70,10 @@ Allow all s3 actions
 ```
 python statement_maker.py scp --add-all --service s3 --effect Allow
 ```
+
+
+## Docker support
+Instead of installing the python dependencies you can use a version of this using docker hub
+```
+docker run -it eamonnfaherty83/aws-statement-maker scp --add-all --service s3 --effect Allow
+```
