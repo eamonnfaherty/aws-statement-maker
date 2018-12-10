@@ -1,5 +1,16 @@
 sudo: 'required'
 
+git:
+  depth: 3
+
+branches:
+  only:
+  - master
+
+language: python
+python:
+  - "2.7"
+
 services:
   - 'docker'
 
