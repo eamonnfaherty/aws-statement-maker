@@ -63,7 +63,7 @@ def main(ctx):
 @main.command()
 @click.option('--service', prompt='Service', help='Service you want to generate a statement for')
 @click.option('--effect', prompt='Allow', help='effect for the actions you are specifying', default='Allow')
-@click.option('--resource', prompt='Resource', help='resource to apply the effect for the actions for', is_eager=True)
+@click.option('--resource', prompt='Resource', help='resource to apply the effect for the actions for')
 @click.option('--add-all', help='do not interactively ask per each action, add all instead', is_flag=True)
 @click.option('--wrap-in-cfn', help='wrap the statement in a cfn template', is_flag=True)
 @click.option('--format', type=click.Choice(['yaml', 'json']), help='output you want (yaml or json)', default='yaml')
@@ -85,7 +85,8 @@ def iam(ctx, service, effect, resource, add_all, wrap_in_cfn, format):
                 "Policy": {
                     "Type": "AWS::IAM::ManagedPolicy",
                     "Properties": {
-                        "ManagedPolicyName": Sub(u'${ManagedPolicyName}'),
+                        "ManagedPolicyName": Sub(u'${ManagedPolicyName}') if format == 'yaml' else {
+                            "Fn::Sub": '${ManagedPolicyName}'},
                         "PolicyDocument": {
                             "Version": "2012-10-17",
                             "Statement": [statement]
@@ -103,7 +104,7 @@ def iam(ctx, service, effect, resource, add_all, wrap_in_cfn, format):
 @click.option('--add-all', help='do not interactively ask per each action, add all instead', is_flag=True)
 @click.pass_context
 def scp(ctx, service, effect, add_all):
-    """Interactive tool to generate a statement for an IAM policy.  Uses the latest list of services and actions
+    """Interactive tool to generate a statement for an SCP policy.  Uses the latest list of services and actions
     from AWS"""
     details = get_details_for_service(service)
     statement = get_statement(details, effect, add_all)
