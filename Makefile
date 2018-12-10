@@ -1,7 +1,9 @@
 .PHONY: build publish
 
+TAG=eamonnfaherty83/aws-statement-maker
+
 build:
-	docker build . -t eamonnfaherty83/aws-statement-builder
+	docker build . -t $(TAG)
 
 publish:
-	docker push eamonnfaherty83/aws-statement-builder
+	docker push $(TAG)
