@@ -1,4 +1,4 @@
-# iam-statement-maker
+# aws-statement-maker
 
 ## What is this?
 Writing secure IAM and SCP Policies takes a long time; you need to check the actions for the resources
@@ -10,7 +10,7 @@ statement, which effect you would like and for which resource.
 
 ## Usage
 ```
-Usage: iam_statement_maker.py [OPTIONS] COMMAND [ARGS]...
+Usage: aws_statement_maker.py [OPTIONS] COMMAND [ARGS]...
 
 Options:
   --help  Show this message and exit.
